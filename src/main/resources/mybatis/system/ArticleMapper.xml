@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guoguo.project.system.article.mapper.ArticleMapper">
+    
+    <resultMap type="Article" id="ArticleResult">
+        <result property="articleId"    column="article_id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="keyWords"    column="key_words"    />
+        <result property="author"    column="author"    />
+        <result property="publishTime"    column="publishTime"    />
+        <result property="publisher"    column="publisher"    />
+        <result property="recommend"    column="recommend"    />
+        <result property="isPublished"    column="is_published"    />
+        <result property="state"    column="state"    />
+        <result property="isTop"    column="is_top"    />
+        <result property="image"    column="image"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="delState"    column="del_state"    />
+        <result property="adminId"    column="admin_id"    />
+    </resultMap>
+    
+    <select id="selectArticleById" parameterType="Integer" resultMap="ArticleResult">
+        select article_id, category_id, title, content, key_words, author, publishTime, publisher, recommend, is_published, state, is_top, image, create_time, update_time, del_state, admin_id from t_article
+        where article_id = #{articleId}
+    </select>
+    
+    <select id="selectArticleList" parameterType="Article" resultMap="ArticleResult">
+        select article_id, category_id, title, content, key_words, author, publishTime, publisher, recommend, is_published, state, is_top, image, create_time, update_time, del_state, admin_id from t_article
+        <where>  
+            <if test="articleId != null and articleId != ''"> and article_id = #{articleId}</if>
+             <if test="categoryId != null and categoryId != ''"> and category_id = #{categoryId}</if>
+             <if test="title != null and title != ''"> and title = #{title}</if>
+             <if test="content != null and content != ''"> and content = #{content}</if>
+             <if test="keyWords != null and keyWords != ''"> and key_words = #{keyWords}</if>
+             <if test="author != null and author != ''"> and author = #{author}</if>
+             <if test="publishTime != null and publishTime != ''"> and publishTime = #{publishTime}</if>
+             <if test="publisher != null and publisher != ''"> and publisher = #{publisher}</if>
+             <if test="recommend != null and recommend != ''"> and recommend = #{recommend}</if>
+             <if test="isPublished != null and isPublished != ''"> and is_published = #{isPublished}</if>
+             <if test="state != null and state != ''"> and state = #{state}</if>
+             <if test="isTop != null and isTop != ''"> and is_top = #{isTop}</if>
+             <if test="image != null and image != ''"> and image = #{image}</if>
+             <if test="createTime != null and createTime != ''"> and create_time = #{createTime}</if>
+             <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime}</if>
+             <if test="delState != null and delState != ''"> and del_state = #{delState}</if>
+             <if test="adminId != null and adminId != ''"> and admin_id = #{adminId}</if>
+         </where>
+    </select>
+    
+    <insert id="insertArticle" parameterType="Article">
+        insert into t_article (
+			<if test="articleId != null and articleId != '' ">article_id, </if>
+			<if test="categoryId != null and categoryId != '' ">category_id, </if>
+			<if test="title != null and title != '' ">title, </if>
+			<if test="content != null and content != '' ">content, </if>
+			<if test="keyWords != null and keyWords != '' ">key_words, </if>
+			<if test="author != null and author != '' ">author, </if>
+			<if test="publishTime != null and publishTime != '' ">publishTime, </if>
+			<if test="publisher != null and publisher != '' ">publisher, </if>
+			<if test="recommend != null and recommend != '' ">recommend, </if>
+			<if test="isPublished != null and isPublished != '' ">is_published, </if>
+			<if test="state != null and state != '' ">state, </if>
+			<if test="isTop != null and isTop != '' ">is_top, </if>
+			<if test="image != null and image != '' ">image, </if>
+			<if test="createTime != null and createTime != '' ">create_time, </if>
+			<if test="updateTime != null and updateTime != '' ">update_time, </if>
+			<if test="delState != null and delState != '' ">del_state, </if>
+			<if test="adminId != null and adminId != '' ">admin_id</if>
+        )values(
+			<if test="articleId != null and articleId != ''">#{articleId}, </if>
+			<if test="categoryId != null and categoryId != ''">#{categoryId}, </if>
+			<if test="title != null and title != ''">#{title}, </if>
+			<if test="content != null and content != ''">#{content}, </if>
+			<if test="keyWords != null and keyWords != ''">#{keyWords}, </if>
+			<if test="author != null and author != ''">#{author}, </if>
+			<if test="publishTime != null and publishTime != ''">#{publishTime}, </if>
+			<if test="publisher != null and publisher != ''">#{publisher}, </if>
+			<if test="recommend != null and recommend != ''">#{recommend}, </if>
+			<if test="isPublished != null and isPublished != ''">#{isPublished}, </if>
+			<if test="state != null and state != ''">#{state}, </if>
+			<if test="isTop != null and isTop != ''">#{isTop}, </if>
+			<if test="image != null and image != ''">#{image}, </if>
+			<if test="createTime != null and createTime != ''">#{createTime}, </if>
+			<if test="updateTime != null and updateTime != ''">#{updateTime}, </if>
+			<if test="delState != null and delState != ''">#{delState}, </if>
+			<if test="adminId != null and adminId != ''">#{adminId}</if>
+		)
+    </insert>
+	 
+    <update id="updateArticle" parameterType="Article">
+        update t_article 
+        <set>
+            <if test="categoryId != null and categoryId != ''">category_id = #{categoryId}, </if>
+            <if test="title != null and title != ''">title = #{title}, </if>
+            <if test="content != null and content != ''">content = #{content}, </if>
+            <if test="keyWords != null and keyWords != ''">key_words = #{keyWords}, </if>
+            <if test="author != null and author != ''">author = #{author}, </if>
+            <if test="publishTime != null and publishTime != ''">publishTime = #{publishTime}, </if>
+            <if test="publisher != null and publisher != ''">publisher = #{publisher}, </if>
+            <if test="recommend != null and recommend != ''">recommend = #{recommend}, </if>
+            <if test="isPublished != null and isPublished != ''">is_published = #{isPublished}, </if>
+            <if test="state != null and state != ''">state = #{state}, </if>
+            <if test="isTop != null and isTop != ''">is_top = #{isTop}, </if>
+            <if test="image != null and image != ''">image = #{image}, </if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime}, </if>
+            <if test="updateTime != null and updateTime != ''">update_time = #{updateTime}, </if>
+            <if test="delState != null and delState != ''">del_state = #{delState}, </if>
+            <if test="adminId != null and adminId != ''">admin_id = #{adminId}</if>
+        </set>
+        where article_id = #{articleId}
+    </update>
+	
+    <delete id="deleteArticleById" parameterType="Integer">
+        delete from t_article where article_id = #{value}
+    </delete>
+	
+    <delete id="batchDeleteArticle" parameterType="Integer">
+        delete from t_article where article_id in 
+        <foreach item="articleId" collection="array" open="(" separator="," close=")">
+        #{articleId}
+        </foreach>
+    </delete>
+    
+</mapper>
